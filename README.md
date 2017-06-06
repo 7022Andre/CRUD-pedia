@@ -1,9 +1,6 @@
-# README
+# Blocipedia
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+A CRUD application using Ruby on Rails that allows users to create public and private Markdown-based wikis.
 
 * Ruby version
 
@@ -20,5 +17,3 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
-* ...

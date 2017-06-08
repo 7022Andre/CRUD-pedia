@@ -13,6 +13,7 @@ group :development do
 	gem 'web-console', '>= 3.3.0'
 	gem 'listen'
 	gem 'sqlite3'
+	gem 'mailcatcher'
 end
 
 gem 'sass-rails', '~> 5.0'
@@ -22,6 +23,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'bootstrap-sass'
 gem 'figaro'
+gem 'devise'
 
 group :development, :test do
 	gem 'byebug', platform: :mri

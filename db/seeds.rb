@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+member = User.create!(
+	email: 'member@blocipedia-7022.com',
+	password: 'password'
+)

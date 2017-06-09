@@ -13,8 +13,12 @@
   	<div class="container">
   		<ul class="nav nav-tabs">
   			<li><%= link_to "Home", root_path %></li>
-        <li class="pull-right"><%= link_to "Log In", new_user_session_path %></li>
-        <li class="pull-right"><%= link_to "Sign Up", new_user_registration_path %></li>
+        <% if user_signed_in? %>
+          <li class="pull-right"><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li class="pull-right"><%= link_to "Log In", new_user_session_path %></li>
+          <li class="pull-right"><%= link_to "Sign Up", new_user_registration_path %></li>
+        <% end %>
   		</ul>
 
       <% if flash[:notice] %>

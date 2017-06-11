@@ -4,7 +4,9 @@
 	<h2>Social, Markdown Wikis</h2>
 	<h3>Create and share</h3>
 	<br>
-	<%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %>
+	<% if !user_signed_in? %>
+		<%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %>
+	<% end %>
 </div>
 
 <div class="row text-center">

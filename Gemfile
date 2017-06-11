@@ -29,6 +29,7 @@ group :development, :test do
 	gem 'byebug', platform: :mri
 	gem 'spring'
 	gem 'rspec-rails'
+	gem 'rails-controller-testing'
 	gem 'shoulda'
 	gem 'faker'
 	gem 'factory_girl_rails'

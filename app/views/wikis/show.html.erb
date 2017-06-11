@@ -1,15 +1,13 @@
-<h1><%= @wiki.title %></h1>
-
-<div class="row">
-	<div class="col-md-8">
-		<p><%= @wiki.body %></p>
-		<p>Created by <strong><%= @wiki.user.email %></strong> | Last updated on <strong><%= @wiki.updated_at %></strong></p>
-	</div>
-
-	<div class="col-md-4">
-		<% if user_signed_in? %>
-			<%= link_to "Edit Wiki", edit_wiki_path, class: "btn btn-success" %>
-			<%= link_to "Delete Wiki", @wiki, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
-		<% end %>
-	</div>
+<div class="jumbotron">
+	<h1><%= @wiki.title %></h1>
+	<p><%= @wiki.body %></p>
+	<h5>Created by <strong><%= @wiki.user.email %></strong> | Last updated on <strong><%= @wiki.updated_at %></strong></h5>
 </div>
+
+<div class="buttons text-center">
+	<% if user_signed_in? %>
+		<%= link_to "Edit Wiki", edit_wiki_path, class: "btn btn-success" %>
+		<%= link_to "Delete Wiki", @wiki, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+	<% end %>
+</div>
+

@@ -1,11 +1,19 @@
-<h1>All Wikis</h1>
+<h1 class="text-center">Wiki Wiki</h1>
 
-<% @wikis.each do |wiki| %>
-	<div class="media">
-	  <div class="media-body">
-	    <h4 class="media-heading">
-	      <%= link_to wiki.title, wiki %>
-	    </h4>
-	  </div>
+<div class="row">
+	<div class="col-md-8">
+	<% if user_signed_in? %>
+		<%= link_to "Create a new Wiki", new_wiki_path, class: "btn btn-success" %>
+	<% end %>	
+
+	<% @wikis.each do |wiki| %>
+		<div class="media">
+		  <div class="media-body">
+		    <h4 class="media-heading">
+		      <%= link_to wiki.title, wiki %>
+		    </h4>
+		  </div>
+		</div>
+	<% end %>
 	</div>
-<% end %>
+</div>

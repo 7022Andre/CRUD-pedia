@@ -10,14 +10,34 @@
   Role.find_or_create_by({name: role})
 end
 
-user_one = User.create!(
-	email: "member@blocipedia7022.com",
-	password: "password",
-	confirmed_at: Time.now
-)
+5.times do
+	user = User.create!(
+		email:    Faker::Internet.unique.email,
+		password: Faker::Internet.password
+	)
+	user.skip_confirmation!
+	user.save!
+end
+users = User.all
 
-user_two = User.create!(
-	email: "other_member@blocipedia7022.com",
-	password: "password",
-	confirmed_at: Time.now
+20.times do
+	wiki = Wiki.create!(
+		title:   Faker::Beer.unique.name,
+		body:    Faker::Lorem.paragraphs(10),
+		private: false,
+		user:    users.sample
+	)
+	wiki.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+end
+wikis = Wiki.all
+
+my_user = User.create!(
+	email:    "member@blocipedia7022.com",
+	password: "password"
 )
+my_user.skip_confirmation!
+my_user.save!
+
+puts "Seed finished"
+puts "#{User.count} users created"
+puts "#{Wiki.count} wikis created"

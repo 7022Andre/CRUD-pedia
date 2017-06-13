@@ -1,7 +1,7 @@
 <div class="jumbotron">
 	<h1><%= @wiki.title %></h1>
 	<p><%= @wiki.body %></p>
-	<h5>Created by <strong><%= @wiki.user.email %></strong> | Last updated on <strong><%= @wiki.updated_at %></strong></h5>
+	<h5><strong><%= @wiki.user.email %></strong> | Created: <strong><%= time_ago_in_words(@wiki.created_at) %> ago</strong> | Last update: <strong><%= time_ago_in_words(@wiki.updated_at) %> ago</strong></h5>
 </div>
 
 <div class="buttons text-center">

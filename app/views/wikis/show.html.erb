@@ -5,9 +5,10 @@
 </div>
 
 <div class="buttons text-center">
-	<% if user_signed_in? %>
+	<% if user_signed_in? && current_user == @wiki.user %>
 		<%= link_to "Edit Wiki", edit_wiki_path, class: "btn btn-success" %>
 		<%= link_to "Delete Wiki", @wiki, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+	<% elsif user_signed_in? %>
+		<%= link_to "Edit Wiki", edit_wiki_path, class: "btn btn-success" %>
 	<% end %>
 </div>
-

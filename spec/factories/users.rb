@@ -4,5 +4,6 @@ pw = RandomData.random_sentence
 		sequence(:email){|n| "user#{n}@factory.com" }
 		password pw
 		password_confirmation pw
+		role
 	end
 end

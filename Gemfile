@@ -24,6 +24,7 @@ gem 'turbolinks', '~> 5'
 gem 'bootstrap-sass'
 gem 'figaro'
 gem 'devise'
+gem 'pundit'
 
 group :development, :test do
 	gem 'byebug', platform: :mri

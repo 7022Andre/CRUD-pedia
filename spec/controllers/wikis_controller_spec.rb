@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe WikisController, type: :controller do
 
   let(:my_wiki) { create(:wiki, user: subject.current_user) }
-  let(:my_other_wiki) { create(:wiki) }
+  let(:other_wiki) { create(:wiki) }
 
   context "guest user - not signed in" do
     describe "GET #index" do
@@ -15,12 +15,12 @@ RSpec.describe WikisController, type: :controller do
 
     describe "GET #show" do
       it "returns http success" do
-        get :show, {id: my_other_wiki.id}
+        get :show, {id: other_wiki.id}
         expect(response).to have_http_status(:success)
       end
 
       it "renders the #show view" do
-        get :show, {id: my_other_wiki.id}
+        get :show, {id: other_wiki.id}
         expect(response).to render_template :show
       end
     end
@@ -41,7 +41,7 @@ RSpec.describe WikisController, type: :controller do
 
     describe "GET #edit" do
       it "returns http redirect" do
-        get :edit, {id: my_other_wiki.id}
+        get :edit, {id: other_wiki.id}
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -51,23 +51,22 @@ RSpec.describe WikisController, type: :controller do
         new_name = RandomData.random_sentence
         new_description = RandomData.random_paragraph
 
-        put :update, id: my_other_wiki.id, wiki: {name: new_name, description: new_description }
+        put :update, id: other_wiki.id, wiki: {name: new_name, description: new_description }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
 
     describe "DELETE #destroy" do
       it "returns http redirect" do
-        delete :destroy, {id: my_other_wiki.id}
+        delete :destroy, {id: other_wiki.id}
         expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
 
-  context "signed in standard user" do
+  context "standard user, CRUD on own wiki (all methods permitted)" do
     describe "GET #index" do
       login_user
-
       it "returns http success" do
         get :index
         expect(response).to have_http_status(:success)
@@ -81,7 +80,6 @@ RSpec.describe WikisController, type: :controller do
 
     describe "GET #show" do
       login_user
-
       it "returns http success" do
         get :show, {id: my_wiki.id}
         expect(response).to have_http_status(:success)
@@ -90,7 +88,6 @@ RSpec.describe WikisController, type: :controller do
 
     describe "GET #new" do
       login_user
-
       it "returns http success" do
         get :new
         expect(response).to have_http_status(:success)
@@ -104,7 +101,6 @@ RSpec.describe WikisController, type: :controller do
 
     describe "POST #create" do
       login_user
-
       it "increases Wiki count by 1" do
         expect{ post :create, wiki: {title: RandomData.random_sentence, body: RandomData.random_paragraph, user: subject.current_user} }.to change(Wiki,:count).by(1)
       end
@@ -122,7 +118,6 @@ RSpec.describe WikisController, type: :controller do
 
     describe "GET #edit" do
       login_user
-
       it "returns http success" do
         get :edit, {id: my_wiki.id}
         expect(response).to have_http_status(:success)
@@ -136,8 +131,7 @@ RSpec.describe WikisController, type: :controller do
 
     describe "PUT #update" do
       login_user
-
-      it "updates post and returns http redirect" do
+      it "updates wiki and returns http redirect" do
         new_title = RandomData.random_sentence
         new_body = RandomData.random_paragraph
         put :update, id: my_wiki.id, wiki: {title: new_title, body: new_body}
@@ -147,10 +141,29 @@ RSpec.describe WikisController, type: :controller do
 
     describe "DELETE #destroy" do
       login_user
-
-      it "deletes post and returns http redirect" do
+      it "deletes wiki and returns http redirect" do
         delete :destroy, {id: my_wiki.id}
         expect(response).to redirect_to(wikis_path)
+      end
+    end
+  end
+
+  context "standard user, CRUD on other wiki (edit permitted, destroy not permitted)" do
+    describe "PUT #update" do
+      login_other_user
+      it "updates wiki and returns http redirect" do
+        new_title = RandomData.random_sentence
+        new_body = RandomData.random_paragraph
+        put :update, id: other_wiki.id, wiki: {title: new_title, body: new_body}
+        expect(response).to redirect_to(wiki_path)
+      end
+    end
+
+    describe "DELETE #destroy" do
+      login_other_user
+      it "other user can't delete wiki and returns to wiki" do
+        delete :destroy, {id: other_wiki.id}
+        expect(response).to redirect_to(wiki_path)
       end
     end
   end

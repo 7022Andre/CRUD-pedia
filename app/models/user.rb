@@ -4,12 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :wikis
-  belongs_to :role
-  after_initialize :set_default_role
+  after_initialize { self.role ||= :standard }
 
-  private
-
-  def set_default_role
-  	self.role ||= Role.find_by_name('standard')
-  end
+  enum role: [:standard, :premium, :admin]
 end

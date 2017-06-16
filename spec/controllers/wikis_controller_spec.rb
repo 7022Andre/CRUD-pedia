@@ -4,6 +4,7 @@ RSpec.describe WikisController, type: :controller do
 
   let(:my_wiki) { create(:wiki, user: subject.current_user) }
   let(:other_wiki) { create(:wiki) }
+  let(:private_wiki) { create(:wiki, private: true) }
 
   context "guest user - not signed in" do
     describe "GET #index" do
@@ -66,7 +67,7 @@ RSpec.describe WikisController, type: :controller do
 
   context "standard user, CRUD on own wiki (all methods permitted)" do
     describe "GET #index" do
-      login_user
+      login_standard_user
       it "returns http success" do
         get :index
         expect(response).to have_http_status(:success)
@@ -79,7 +80,7 @@ RSpec.describe WikisController, type: :controller do
     end
 
     describe "GET #show" do
-      login_user
+      login_standard_user
       it "returns http success" do
         get :show, {id: my_wiki.id}
         expect(response).to have_http_status(:success)
@@ -87,7 +88,7 @@ RSpec.describe WikisController, type: :controller do
     end
 
     describe "GET #new" do
-      login_user
+      login_standard_user
       it "returns http success" do
         get :new
         expect(response).to have_http_status(:success)
@@ -100,7 +101,7 @@ RSpec.describe WikisController, type: :controller do
     end
 
     describe "POST #create" do
-      login_user
+      login_standard_user
       it "increases Wiki count by 1" do
         expect{ post :create, wiki: {title: RandomData.random_sentence, body: RandomData.random_paragraph, user: subject.current_user} }.to change(Wiki,:count).by(1)
       end
@@ -117,7 +118,7 @@ RSpec.describe WikisController, type: :controller do
     end
 
     describe "GET #edit" do
-      login_user
+      login_standard_user
       it "returns http success" do
         get :edit, {id: my_wiki.id}
         expect(response).to have_http_status(:success)
@@ -130,7 +131,7 @@ RSpec.describe WikisController, type: :controller do
     end
 
     describe "PUT #update" do
-      login_user
+      login_standard_user
       it "updates wiki and returns http redirect" do
         new_title = RandomData.random_sentence
         new_body = RandomData.random_paragraph
@@ -140,7 +141,7 @@ RSpec.describe WikisController, type: :controller do
     end
 
     describe "DELETE #destroy" do
-      login_user
+      login_standard_user
       it "deletes wiki and returns http redirect" do
         delete :destroy, {id: my_wiki.id}
         expect(response).to redirect_to(wikis_path)
@@ -150,7 +151,7 @@ RSpec.describe WikisController, type: :controller do
 
   context "standard user, CRUD on other wiki (edit permitted, destroy not permitted)" do
     describe "PUT #update" do
-      login_other_user
+      login_other_standard_user
       it "updates wiki and returns http redirect" do
         new_title = RandomData.random_sentence
         new_body = RandomData.random_paragraph
@@ -160,10 +161,47 @@ RSpec.describe WikisController, type: :controller do
     end
 
     describe "DELETE #destroy" do
-      login_other_user
-      it "other user can't delete wiki and returns to wiki" do
+      login_other_standard_user
+
+      it "other user can't delete wiki and returns to root" do
+        request.env['HTTP_REFERER'] = 'http://localhost:3000'
         delete :destroy, {id: other_wiki.id}
-        expect(response).to redirect_to(wiki_path)
+        expect(response).to redirect_to(request.referer)
+      end
+    end
+  end
+
+  context "private wiki" do
+    describe "guest" do
+      it "can't open private wiki" do
+        request.env['HTTP_REFERER'] = 'http://localhost:3000'
+        get :show, {id: private_wiki.id}
+        expect(response).to redirect_to(request.referer)
+      end
+    end
+
+    describe "standard user" do
+      login_standard_user
+
+      it "can't create private wiki" do
+        request.env['HTTP_REFERER'] = 'http://localhost:3000'
+        post :create, wiki: {title: RandomData.random_sentence, body: RandomData.random_paragraph, user: subject.current_user, private: true}
+        expect(response).to redirect_to(request.referer)
+      end
+
+      it "can't open private wiki" do
+        request.env['HTTP_REFERER'] = 'http://localhost:3000'
+        get :show, {id: private_wiki.id}
+        expect(response).to redirect_to(request.referer)
+      end
+    end
+
+    describe "premium user" do
+      login_premium_user
+
+      it "can open private wiki" do
+        get :show, {id: private_wiki.id}
+        expect(response).to have_http_status(:success)
       end
     end
   end

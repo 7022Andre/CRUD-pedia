@@ -1,0 +1,35 @@
+<br>
+<div class="row">
+	<div class="col-md-8">
+		<h2 class="text-center">Wikis you've created</h2>
+		<table class="table table-striped">
+			<tbody>
+	 			<%= render @user.wikis %>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="col-md-4">
+		<h3>Current membership: <%= @user.role.titlecase %></h3>
+		<% if @user.standard? %>
+			<%= form_tag charges_path do %>
+		  	<h4>Upgrade to a premium membership now to create and read private wikis!</h4>
+		  	<script class="stripe-button" src="https://checkout.stripe.com/checkout.js" data-key="<%= Rails.configuration.stripe[:publishable_key] %>" data-amount="1500" data-description="Upgrade to premium membership" data-locale="auto"></script>
+			<% end %>
+		<% elsif @user.premium? %>
+			<br>
+			<%= form_for @user do |t| %>
+    		<%= t.hidden_field :role, :value=>"standard" %>
+    		<%= t.submit "Downgrade your membership", class:"btn btn-danger", data: {confirm: "Are you sure?"} %>
+			<% end %>
+			<h3>What to expect when downgrading?</h3>
+			<ul>
+				<li>You will not be able to view, create or edit private wikis.</li>
+				<li>You can still view and edit private wikis that you've created.</li>
+				<li>Please contact us so we can issue you a full or partial refund.</li>
+			</ul>
+		<% end %>
+	</div>
+</div>
+
+

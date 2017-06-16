@@ -1,16 +1,17 @@
 class WikiPolicy < ApplicationPolicy
-  attr_reader :user, :wiki
+	def show?
+		user.present? && (user.premium? || user == record.user)
+	end
 
-  def initialize(user, wiki)
-    @user = user
-    @wiki = wiki
-  end
+	def create?
+		show?
+	end
 
-  def show?
-  	true
-  end
- 
+	def edit?
+		show?
+	end
+
   def destroy?
-    user == wiki.user && user.present?
+    user == record.user && user.present?
   end
 end

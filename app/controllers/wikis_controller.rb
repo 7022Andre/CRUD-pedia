@@ -1,5 +1,6 @@
 class WikisController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
+	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
 	def index
 		@wikis = Wiki.all
@@ -7,6 +8,9 @@ class WikisController < ApplicationController
 
 	def show
 		@wiki = Wiki.find(params[:id])
+		if @wiki.private
+			authorize @wiki
+		end
 	end
 
 	def new
@@ -15,6 +19,9 @@ class WikisController < ApplicationController
 
 	def create
 		@wiki = Wiki.new(wiki_params)
+		if @wiki.private
+			authorize @wiki
+		end
 		@wiki.user = current_user
 
 		if @wiki.save
@@ -28,11 +35,17 @@ class WikisController < ApplicationController
 
 	def edit
 		@wiki = Wiki.find(params[:id])
+		if @wiki.private
+			authorize @wiki
+		end
 	end
 
 	def update
 		@wiki = Wiki.find(params[:id])
 		@wiki.assign_attributes(wiki_params)
+		if @wiki.private
+			authorize @wiki
+		end
 
 		if @wiki.save
 			flash[:notice] = "Your wiki was updated."
@@ -61,4 +74,16 @@ class WikisController < ApplicationController
 	def wiki_params
 		params.require(:wiki).permit(:title, :body, :private)
 	end
+
+	private
+
+	def user_not_authorized(exception)
+		if exception.query == 'show?' || exception.query == 'create?' || exception.query == 'edit?'
+  		flash[:alert] = "Please upgrade to a Premium membership to create, edit or read a private wiki."
+  		redirect_to request.referer
+  	else
+  		flash[:alert] = "You are not authorized to perform this action."
+  		redirect_to request.referer
+  	end
+  end
 end

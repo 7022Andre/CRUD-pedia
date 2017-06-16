@@ -2,23 +2,19 @@
 <div class="row jumbotron text-center">
 	<h1>Blocipedia</h1>
 	<h2>Social, Markdown Wikis</h2>
-	<h3>Create and share</h3>
-	<br>
-	<% if !user_signed_in? %>
-		<%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %>
-	<% end %>
+	<h3>Create and share your favorite Wikis.</h3>
 </div>
 
-<div class="row text-center">
-	<h2>OUR PLANS</h2>
+<div class="row text-center well">
 	<div class="col-md-6 well">
-		<h2>Free</h2>
+		<h2>Free Membership</h2>
 		<p>Create as many public Wikis as you want!</p>
-		<p>FEATURES AND LINK HERE</p>
 	</div>
 	<div class="col-md-6 well">
 		<h2>Premium</h2>
-		<p>Create private Wikis!</p>
-		<p>FEATURES AND LINK HERE</p>
+		<p>Create private Wikis. Only $15 to join! To upgrade please visit your user profile.</p>
 	</div>
+	<% if !user_signed_in? %>
+		<%= link_to "Sign Up Now", new_user_registration_path, class: 'btn btn-primary' %>
+	<% end %>
 </div>

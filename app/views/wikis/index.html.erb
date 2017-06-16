@@ -6,7 +6,12 @@
 			<tbody>
 				<% @wikis.each do |wiki| %>
 					<tr class="media">
-						<td><%= link_to wiki.title, wiki %></td>
+						<td>
+							<% if wiki.private %>
+								<i class="glyphicon glyphicon-sunglasses"></i>
+							<% end %>
+							<%= link_to " #{wiki.title}", wiki %>
+						</td>
 				 		<% if user_signed_in? && current_user == wiki.user %>
 							<td><%= link_to "Edit", edit_wiki_path(wiki.id) %></td>
 							<td><%= link_to "DELETE", wiki, method: :delete, data: {confirm: "Are you sure?"} %></td>

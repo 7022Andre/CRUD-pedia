@@ -1,6 +1,6 @@
 class WikiPolicy < ApplicationPolicy
 	def show?
-		user.present? && (user.premium? || user == record.user)
+		user.present? && (user.premium? || user.admin? || user == record.user)
 	end
 
 	def create?
@@ -12,6 +12,6 @@ class WikiPolicy < ApplicationPolicy
 	end
 
   def destroy?
-    user == record.user && user.present?
+    user.present? && (user == record.user || user.admin?)
   end
 end

@@ -6,9 +6,9 @@
     <%= link_to wiki.title, wiki %>
   </td>
   <% if user_signed_in? && current_user == wiki.user %>
-    <td><%= link_to "Edit", edit_wiki_path(wiki.id) %></td>
-    <td><%= link_to "DELETE", wiki, method: :delete, data: {confirm: "Are you sure?"} %></td>
+    <td><%= link_to "Edit", edit_wiki_path(wiki.id), class:"btn btn-success" %></td>
+    <td><%= link_to "DELETE", wiki, method: :delete, class:"btn btn-danger", data: {confirm: "Are you sure?"} %></td>
     <% elsif user_signed_in? %>
-    <td><%= link_to "Edit", edit_wiki_path(wiki.id) %></td>
+    <td><%= link_to "Edit", edit_wiki_path(wiki.id), class:"btn btn-success" %></td>
   <% end %>
 </tr>

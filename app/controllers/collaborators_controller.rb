@@ -1,8 +1,8 @@
 class CollaboratorsController < ApplicationController
 	before_action :authenticate_user!
 
-  def create
-  	@collaborator = @wiki.collaborators.build(user_id: user.id)
+  def create(user)
+  	@collaborator = @wiki.collaborators.build(user_id: user)
 
 		if @collaborator.save
 			flash[:notice] = "Access was granted successfully."

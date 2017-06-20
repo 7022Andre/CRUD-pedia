@@ -41,7 +41,7 @@
         <tr class="media">
           <td><%= user.email %></td>
           <td>
-          <%= link_to 'Grant Access', wiki_collaborators_path(@wiki), method: :post, class:"btn btn-success" %>
+          <%= link_to 'Grant Access', wiki_collaborators_path(user.id), method: :post, class:"btn btn-success" %>
           </td>
         </tr>
         <% end %>

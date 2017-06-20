@@ -34,10 +34,11 @@ class WikisController < ApplicationController
 	end
 
 	def edit
-		@wiki = Wiki.find(params[:id])
+		@wiki = Wiki.includes(:collaborate_users).find(params[:id])
 		if @wiki.private
 			authorize @wiki
 		end
+		@users = User.where(role: "standard")
 	end
 
 	def update

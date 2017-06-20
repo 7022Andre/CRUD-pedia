@@ -1,6 +1,6 @@
 class WikiPolicy < ApplicationPolicy
 	def show?
-		user.present? && (user.premium? || user.admin? || user == record.user)
+		user.present? && (user.premium? || user.admin? || user == record.user || record.collaborate_users.include?(user) )
 	end
 
 	def create?

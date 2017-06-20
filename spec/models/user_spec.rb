@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 	let(:user) { create(:user) }
+	let(:wiki) { create(:wiki) }
+	let(:collaborator) { create(:collaborator, user: user, wiki: wiki) }
 
 	describe "attributes" do
 		it "should have email and password" do
@@ -9,7 +11,7 @@ RSpec.describe User, type: :model do
 		end
 
 		it "user should have standard role" do
-			expect(user.role_id).to eq 1
+			expect(user.role).to eq "standard"
 		end
 
 		it "user should not be confirmed after signup" do

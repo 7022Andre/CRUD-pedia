@@ -7,6 +7,19 @@
 	 			<%= render @user.wikis %>
 			</tbody>
 		</table>
+		<% if @user.standard? %>
+			<h2 class="text-center">Private Wikis you're allowed to view/edit</h2>
+			<table class="table table-striped">
+				<tbody>
+					<% @user.collaborate_wikis.each do |wiki| %>
+						<tr class="media">
+					   	<td><%= link_to wiki.title, wiki %></td>
+					   	<td><%= link_to "Edit", edit_wiki_path(wiki.id), class:"btn btn-success" %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		<% end %>	
 	</div>
 
 	<div class="col-md-4">
@@ -22,7 +35,7 @@
     		<%= t.hidden_field :role, :value=>"standard" %>
     		<%= t.submit "Downgrade your membership", class:"btn btn-danger", data: {confirm: "Are you sure?"} %>
 			<% end %>
-			<h3>What to expect when downgrading?</h3>
+			<h3>What to expect after downgrading?</h3>
 			<ul>
 				<li>You will not be able to view, create or edit private wikis.</li>
 				<li>You can still view and edit private wikis that you've created.</li>

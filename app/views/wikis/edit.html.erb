@@ -1,8 +1,7 @@
 <h1>Edit Your Wiki</h1>
-<% console %>
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-7">
     <%= form_for @wiki do |f| %>
       <div class="form-group">
         <%= f.label :title %>
@@ -21,32 +20,33 @@
     <% end %>
   </div>
 
-  <div class="col-md-4 well">
+  <div class="col-md-5 well">
     <h3>Please enter your description using Markdown.</h3>
     <h5>If you're not familiar with Markdown check out this <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="blank">handy cheat sheet</a>.</h5>
     <br>
 
-  <% if @wiki.private %>
-    <% @wiki.collaborate_users.each do |col_user|%>
-      <%= col_user.email %>
+    <% if @wiki.private && (current_user.premium? || current_user.admin?) %>
+    <table class="well table">
+        <h3>Collaborators</h3>
+        <thead>
+          <th>User</th>
+          <th>Access</th>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr class="media">
+            <td><%= user.email %></td>
+            <td>
+            <% if !@wiki.collaborate_users.include?(user) %>
+              <%= link_to "Grant Access", wiki_collaborators_path(user_id: user.id, wiki_id: @wiki.id), method: :post, class:"btn btn-success" %>
+            <% elsif @wiki.collaborate_users.include?(user) %>
+              <%= link_to "Revoke Access", wiki_collaborator_path(user_id: user.id, wiki_id: @wiki.id), method: :delete, class:"btn btn-danger" %>
+            <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
-    <table class="col-md-4 well table">
-      <h3>Add Collaborators</h3>
-      <thead>
-        <th>User</th>
-        <th>Grant Access</th>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-        <tr class="media">
-          <td><%= user.email %></td>
-          <td>
-          <%= link_to 'Grant Access', wiki_collaborators_path(user.id), method: :post, class:"btn btn-success" %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
   </div>
 </div>

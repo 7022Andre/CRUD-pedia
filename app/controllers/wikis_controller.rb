@@ -80,7 +80,7 @@ class WikisController < ApplicationController
 
 	def user_not_authorized(exception)
 		if exception.query == 'show?' || exception.query == 'create?' || exception.query == 'edit?'
-  		flash[:alert] = "Please upgrade to a Premium membership to create, edit or read a private wiki."
+  		flash[:alert] = "Please upgrade to a Premium membership to read, create or edit a private wiki."
   		redirect_to request.referer
   	else
   		flash[:alert] = "You are not authorized to perform this action."

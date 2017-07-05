@@ -1,19 +1,42 @@
 # Blocipedia
+A CRUD application written in Ruby on Rails using test-driven development (TDD).
 
-A CRUD application using Ruby on Rails that allows users to create public and private Markdown-based wikis.
+## Summary
 
-* Ruby version
+- Ruby: 2.4.0
+- Rails: 5.0.2
 
-* System dependencies
+I wrote the code for this application that allows users to create public and private Markdown-based wikis. This project deepened my understanding of Ruby, Rails (including gems), test-driven development (TDD) as well as Bootstrap. Main features:
 
-* Configuration
+- Authentication and authorization
+- Email confirmations
+- User roles
+- Upgrade to paid and downgrade to unpaid membership status
+- CRUD operations
+- Public/Private wikis
+- Collaborator
 
-* Database creation
+The final product integrates gems from:
 
-* Database initialization
+- [Devise](https://github.com/plataformatec/devise)
+- [Pundit](https://github.com/elabs/pundit)
+- [Figaro](https://github.com/laserlemon/figaro)
+- [Redcarpet](https://github.com/vmg/redcarpet)
+- [Stripe](https://github.com/stripe/stripe-ruby)
 
-* How to run the test suite
+The deployed version can be found [here](https://hidden-cliffs-95626.herokuapp.com).<br>
 
-* Services (job queues, cache servers, search engines, etc.)
+### Authentication
+![login_logout.gif](https://s18.postimg.org/9h0k79p8p/login_logout.gif "Login and Logout")
 
-* Deployment instructions
+### Create wikis
+![create_wiki.gif](https://s12.postimg.org/63qfrov4t/create_wiki.gif "Create wikis")
+
+### Upgrade membership
+![upgrade.gif](https://s9.postimg.org/faue0mqhb/upgrade.gif "Upgrade membership")
+
+### Create private wiki
+![private_wiki.gif](https://s11.postimg.org/h7u1bvclf/private_wiki.gif "Private wiki")
+
+### Granting access to collaborators
+![collaborator.gif](https://s1.postimg.org/kiniq14bj/collaborator.gif "Collaborators")

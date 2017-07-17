@@ -18,6 +18,12 @@ RSpec.describe CollaboratorsController, type: :controller do
 			private_wiki.collaborators.find_by(user_id: user.id).destroy
 			expect(Collaborator.all.empty?).to eq true
 		end
+
+		it "destroys all collaborators of wiki after wiki is deleted" do
+			private_wiki.collaborators.create(user: user)
+			private_wiki.destroy
+			expect(Collaborator.all.empty?).to eq true
+		end
 	end
 
 	describe "admin" do
@@ -31,6 +37,12 @@ RSpec.describe CollaboratorsController, type: :controller do
 		it "destroys collaborator via wiki" do
 			private_wiki.collaborators.create(user: user)
 			private_wiki.collaborators.find_by(user_id: user.id).destroy
+			expect(Collaborator.all.empty?).to eq true
+		end
+
+		it "destroys all collaborators of wiki after wiki is deleted" do
+			private_wiki.collaborators.create(user: user)
+			private_wiki.destroy
 			expect(Collaborator.all.empty?).to eq true
 		end
 	end

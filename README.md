@@ -1,10 +1,10 @@
-# Blocipedia
+# CRUD-pedia
 A CRUD application written in Ruby on Rails using test-driven development (TDD).
 
 ## Summary
 
 - Ruby: 2.4.0
-- Rails: 5.0.2
+- Rails: 5.0.4
 
 I wrote the code for this application that allows users to create public and private Markdown-based wikis. This project deepened my understanding of Ruby, Rails (including gems), test-driven development (TDD) as well as Bootstrap. Main features:
 
@@ -16,7 +16,7 @@ I wrote the code for this application that allows users to create public and pri
 - Public/Private wikis
 - Collaborator
 
-The final product integrates gems from:
+The deployed version integrates gems from:
 
 - [Devise](https://github.com/plataformatec/devise)
 - [Pundit](https://github.com/elabs/pundit)

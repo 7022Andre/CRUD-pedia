@@ -100,9 +100,8 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can't delete other wiki" do
-        request.env['HTTP_REFERER'] = 'http://localhost:3000'
         delete :destroy, {id: other_wiki.id}
-        expect(response).to redirect_to(request.referer)
+        expect(response).to redirect_to(root_path)
       end
     end
 
@@ -153,9 +152,8 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can't delete other wiki" do
-        request.env['HTTP_REFERER'] = 'http://localhost:3000'
         delete :destroy, {id: other_wiki.id}
-        expect(response).to redirect_to(request.referer)
+        expect(response).to redirect_to(root_path)
       end
     end
 
@@ -215,9 +213,8 @@ RSpec.describe WikisController, type: :controller do
   context "private wiki" do
     describe "guest" do
       it "can't open private wiki" do
-        request.env['HTTP_REFERER'] = 'http://localhost:3000'
         get :show, {id: other_private_wiki.id}
-        expect(response).to redirect_to(request.referer)
+        expect(response).to redirect_to(wikis_path)
       end
     end
 
@@ -225,19 +222,16 @@ RSpec.describe WikisController, type: :controller do
       login_standard_user
 
       it "can't create private wiki" do
-        request.env['HTTP_REFERER'] = 'http://localhost:3000'
         post :create, wiki: {title: RandomData.random_sentence, body: RandomData.random_paragraph, user: subject.current_user, private: true}
-        expect(response).to redirect_to(request.referer)
+        expect(response).to redirect_to(wikis_path)
       end
 
       it "can't open private wiki" do
-        request.env['HTTP_REFERER'] = 'http://localhost:3000'
         get :show, {id: other_private_wiki.id}
-        expect(response).to redirect_to(request.referer)
+        expect(response).to redirect_to(wikis_path)
       end
 
       it "can open own private wiki (created as premium user before downgrade)" do
-        request.env['HTTP_REFERER'] = 'http://localhost:3000'
         get :show, {id: private_wiki.id}
         expect(response).to have_http_status(:success)
       end
@@ -269,9 +263,8 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can't delete other private wiki" do
-        request.env['HTTP_REFERER'] = 'http://localhost:3000'
         delete :destroy, {id: other_private_wiki.id}
-        expect(response).to redirect_to(request.referer)
+        expect(response).to redirect_to(root_path)
       end
     end
 

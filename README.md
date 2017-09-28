@@ -24,7 +24,7 @@ The deployed version integrates gems from:
 - [Redcarpet](https://github.com/vmg/redcarpet)
 - [Stripe](https://github.com/stripe/stripe-ruby)
 
-The deployed version can be found [here](https://hidden-cliffs-95626.herokuapp.com).<br>
+The deployed version can be found [here](https://crud-pedia.herokuapp.com).<br>
 
 ### Authentication
 ![login_logout.gif](https://s4.postimg.org/40p91l5a5/login_out.gif "Login and Logout")

@@ -1,3 +1,38 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.welcome {
+  margin-top: 3rem;
+}
+
+.welcome-image {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border: 1rem solid #455A64;
+}
+
+.main-feature {
+  text-align: center;
+}
+
+.sign-up-button {
+  margin: 1rem;
+}
+
+.member-free,
+.member-premium {
+  height: 12rem;
+}
+
+/*
+.dark-primary-color    { background: #455A64; }
+.default-primary-color { background: #607D8B; }
+.light-primary-color   { background: #CFD8DC; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #9E9E9E; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #757575; }
+.divider-color         { border-color: #BDBDBD; }
+*/

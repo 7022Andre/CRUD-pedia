@@ -1,20 +1,28 @@
-<br>
-<div class="row jumbotron text-center">
-	<h1>CRUD-pedia</h1>
-	<h2>Social, Markdown Wikis</h2>
-	<h3>Create and share your favorite Wikis.</h3>
-</div>
+<div class="welcome">
+	<div class="welcome-image">
+		<img src="/images/feature.jpg" alt="crud-collage">
+	</div>
 
-<div class="row text-center well">
-	<div class="col-md-6 well">
-		<h2>Free Membership</h2>
-		<p>Create as many public Wikis as you want!</p>
+	<div class="main-feature">
+		<h1>CRUD-pedia</h1>
+		<h2>Your resource to anything waste, garbage and trash.</h2>
+		<h3>Create and share your favorite trash stories.</h3>
 	</div>
-	<div class="col-md-6 well">
-		<h2>Premium</h2>
-		<p>Create private Wikis. Only $15 to join! To upgrade please visit your user profile.</p>
+
+	<div class="sign-up-button">
+		<% if !user_signed_in? %>
+			<%= link_to "Sign Up Now", new_user_registration_path, class: 'btn btn-lg btn-success' %>
+		<% end %>
 	</div>
-	<% if !user_signed_in? %>
-		<%= link_to "Sign Up Now", new_user_registration_path, class: 'btn btn-primary' %>
-	<% end %>
+
+	<div class="row text-center well membership-feature">
+		<div class="col-md-6 member-free">
+			<h2>Free Membership</h2>
+			<p>Create as many public trash stories as you want!</p>
+		</div>
+		<div class="col-md-6 member-premium">
+			<h2>Premium</h2>
+			<p>Create private stories. Only $15 to join! To upgrade please visit your user profile.</p>
+		</div>
+	</div>
 </div>

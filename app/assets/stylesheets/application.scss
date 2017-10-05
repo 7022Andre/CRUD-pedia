@@ -12,7 +12,20 @@
  *
  *= require_tree .
  *= require_self
- */
+*/
 
- @import "bootstrap-sprockets";
- @import "bootstrap";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.main {
+  margin: 0.5rem 2rem;
+}
+
+.nav {
+  background: #455A64; 
+}
+
+.nav-tab {
+  color: white;
+  border-radius: 0 !important;
+}

@@ -27,10 +27,10 @@ The deployed version integrates gems from:
 The deployed version can be found [here](https://crud-pedia.herokuapp.com).
 
 ### Home Screen
-![home screen](https://s1.postimg.org/8tcf3ywanj/pic1.jpg "Home Screen")
+![home screen](https://s1.postimg.org/3p0qep5dhr/pic2.jpg "Home Screen")
 
-### Home Screen
-![wiki screen](https://s1.postimg.org/3p0qep5dhr/pic2.jpg "Wiki Screen")
+### Stories Screen
+![story screen](https://s1.postimg.org/8tcf3ywanj/pic1.jpg "Story Screen")
 
 ### Authentication
 ![login_logout.gif](https://s4.postimg.org/40p91l5a5/login_out.gif "Login and Logout")

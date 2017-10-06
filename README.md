@@ -24,7 +24,7 @@ The deployed version integrates gems from:
 - [Redcarpet](https://github.com/vmg/redcarpet)
 - [Stripe](https://github.com/stripe/stripe-ruby)
 
-The deployed version can be found [here](https://crud-pedia.herokuapp.com).
+The deployed version can be found [here](https://crud-pedia.herokuapp.com). Heroku [puts apps to sleep](https://devcenter.heroku.com/articles/free-dyno-hours#dyno-sleeping) that don't receive traffic in a 30 minute period. It takes about 30s to one minute for the app to "wake up." Please be patient.
 
 ### Home Screen
 ![home screen](https://s1.postimg.org/3p0qep5dhr/pic2.jpg "Home Screen")

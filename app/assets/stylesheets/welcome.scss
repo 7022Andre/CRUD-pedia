@@ -10,7 +10,6 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  border: 1rem solid #455A64;
 }
 
 .main-feature {
@@ -18,13 +17,26 @@
 }
 
 .sign-up-button {
-  margin: 1rem;
+  margin: 3rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.membership-feature {
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .member-free,
 .member-premium {
+  border: 0.5rem solid #455A64;
+  margin: 1rem;
   height: 12rem;
+  width: 40rem;
+  text-align: center;
 }
+
 
 /*
 .dark-primary-color    { background: #455A64; }

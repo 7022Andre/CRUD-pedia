@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="wiki-item jumbotron">
 	<h1><%= @wiki.title %></h1>
 	<p><%= markdown(@wiki.body) %></p>
 	<h5><strong><%= @wiki.user.email %></strong> | Created: <strong><%= time_ago_in_words(@wiki.created_at) %> ago</strong> | Last update: <strong><%= time_ago_in_words(@wiki.updated_at) %> ago</strong></h5>

@@ -9,31 +9,31 @@ group :production do
 end
 
 group :development do
-	gem 'web-console', '>= 3.3.0'
 	gem 'listen'
-	gem 'sqlite3'
 	gem 'mailcatcher'
+	gem 'sqlite3'
+	gem 'web-console', '>= 3.3.0'
 end
 
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
-gem 'jquery-rails'
-gem 'turbolinks', '~> 5'
 gem 'bootstrap-sass'
-gem 'figaro'
+gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem 'figaro'
+gem 'jquery-rails'
 gem 'pundit'
-gem 'stripe'
 gem 'redcarpet'
+gem 'sass-rails', '~> 5.0'
+gem 'stripe'
+gem 'turbolinks', '~> 5'
+gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
 	gem 'byebug', platform: :mri
-	gem 'spring'
-	gem 'rspec-rails'
-	gem 'rails-controller-testing'
-	gem 'shoulda'
-	gem 'faker'
 	gem 'factory_girl_rails'
+	gem 'faker'
 	gem 'pry-rails'
+	gem 'rails-controller-testing'
+	gem 'rspec-rails'
+	gem 'shoulda'
+	gem 'spring'
 end

@@ -1,9 +1,9 @@
 class CollaboratorPolicy < ApplicationPolicy
   def create?
-  	user.present? && (user.premium? || user.admin?)
+    user.present? && (user.premium? || user.admin?)
   end
 
   def destroy?
-  	create?
+    create?
   end
 end

@@ -15,12 +15,12 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "shows wiki - returns http success" do
-        get :show, { id: other_wiki.id }
+        get :show, id: other_wiki.id
         expect(response).to have_http_status(:success)
       end
 
       it "renders #show view" do
-        get :show, { id: other_wiki.id }
+        get :show, id: other_wiki.id
         expect(response).to render_template :show
       end
 
@@ -35,7 +35,7 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can't edit wiki - returns http redirect" do
-        get :edit, { id: other_wiki.id }
+        get :edit, id: other_wiki.id
         expect(response).to redirect_to(new_user_session_path)
       end
 
@@ -48,7 +48,7 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can't delete wiki - returns http redirect" do
-        delete :destroy, { id: other_wiki.id }
+        delete :destroy, id: other_wiki.id
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -57,7 +57,7 @@ RSpec.describe WikisController, type: :controller do
       login_standard_user
 
       it "can create wiki - increases Wiki count by 1" do
-        expect{ post :create, wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, user: subject.current_user } }.to change(Wiki,:count).by(1)
+        expect{ post :create, wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, user: subject.current_user } }.to change(Wiki, :count).by(1)
       end
 
       it "can create wiki - assigns new wiki to @wiki" do
@@ -71,12 +71,12 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can edit own wiki - returns http success" do
-        get :edit, { id: my_wiki.id }
+        get :edit, id: my_wiki.id
         expect(response).to have_http_status(:success)
       end
 
       it "can edit own wiki- renders #edit view" do
-        get :edit, { id: my_wiki.id }
+        get :edit, id: my_wiki.id
         expect(response).to render_template :edit
       end
 
@@ -88,7 +88,7 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can delete own wiki and returns http redirect" do
-        delete :destroy, { id: my_wiki.id }
+        delete :destroy, id: my_wiki.id
         expect(response).to redirect_to(wikis_path)
       end
 
@@ -100,7 +100,7 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can't delete other wiki" do
-        delete :destroy, { id: other_wiki.id }
+        delete :destroy, id: other_wiki.id
         expect(response).to redirect_to(root_path)
       end
     end
@@ -109,7 +109,7 @@ RSpec.describe WikisController, type: :controller do
       login_premium_user
 
       it "can create wiki - increases Wiki count by 1" do
-        expect{ post :create, wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, user: subject.current_user } }.to change(Wiki,:count).by(1)
+        expect{ post :create, wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, user: subject.current_user } }.to change(Wiki, :count).by(1)
       end
 
       it "can create wiki - assigns new wiki to @wiki" do
@@ -123,12 +123,12 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can edit own wiki - returns http success" do
-        get :edit, { id: my_wiki.id }
+        get :edit, id: my_wiki.id
         expect(response).to have_http_status(:success)
       end
 
       it "can edit own wiki- renders #edit view" do
-        get :edit, { id: my_wiki.id }
+        get :edit, id: my_wiki.id
         expect(response).to render_template :edit
       end
 
@@ -140,7 +140,7 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can delete own wiki and returns http redirect" do
-        delete :destroy, { id: my_wiki.id }
+        delete :destroy, id: my_wiki.id
         expect(response).to redirect_to(wikis_path)
       end
 
@@ -152,7 +152,7 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can't delete other wiki" do
-        delete :destroy, { id: other_wiki.id }
+        delete :destroy, id: other_wiki.id
         expect(response).to redirect_to(root_path)
       end
     end
@@ -161,7 +161,7 @@ RSpec.describe WikisController, type: :controller do
       login_admin_user
 
       it "can create wiki - increases Wiki count by 1" do
-        expect{ post :create, wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, user: subject.current_user } }.to change(Wiki,:count).by(1)
+        expect{ post :create, wiki: { title: RandomData.random_sentence, body: RandomData.random_paragraph, user: subject.current_user } }.to change(Wiki, :count).by(1)
       end
 
       it "can create wiki - assigns new wiki to @wiki" do
@@ -175,12 +175,12 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can edit own wiki - returns http success" do
-        get :edit, { id: my_wiki.id }
+        get :edit, id: my_wiki.id
         expect(response).to have_http_status(:success)
       end
 
       it "can edit own wiki- renders #edit view" do
-        get :edit, { id: my_wiki.id }
+        get :edit, id: my_wiki.id
         expect(response).to render_template :edit
       end
 
@@ -192,7 +192,7 @@ RSpec.describe WikisController, type: :controller do
       end
 
       it "can delete own wiki and returns http redirect" do
-        delete :destroy, { id: my_wiki.id }
+        delete :destroy, id: my_wiki.id
         expect(response).to redirect_to(wikis_path)
       end
 

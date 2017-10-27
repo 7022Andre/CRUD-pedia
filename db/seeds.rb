@@ -1,57 +1,57 @@
 3.times do
-	user = User.create!(
-		email:    Faker::Internet.unique.email,
-		password: Faker::Internet.password
-	)
-	user.skip_confirmation!
-	user.save!
+  user = User.create!(
+    email:    Faker::Internet.unique.email,
+    password: Faker::Internet.password
+  )
+  user.skip_confirmation!
+  user.save!
 end
 standard_seed_user = User.where(role: "standard")
 
 3.times do
-	user = User.create!(
-		email:    Faker::Internet.unique.email,
-		password: Faker::Internet.password
-	)
-	user.skip_confirmation!
-	user.premium!
-	user.save!
+  user = User.create!(
+    email:    Faker::Internet.unique.email,
+    password: Faker::Internet.password
+  )
+  user.skip_confirmation!
+  user.premium!
+  user.save!
 end
 premium_seed_user = User.where(role: "premium")
 
 5.times do
-	wiki = Wiki.create!(
-		title:   Faker::Beer.unique.name,
-		body:    Faker::Lorem.paragraphs(10),
-		private: false,
-		user:    standard_seed_user.sample
-	)
-	wiki.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+  wiki = Wiki.create!(
+    title:   Faker::Beer.unique.name,
+    body:    Faker::Lorem.paragraphs(10),
+    private: false,
+    user:    standard_seed_user.sample
+  )
+  wiki.update_attribute(:created_at, rand(10.minutes..1.year).ago)
 end
 public_wiki = Wiki.where(private: false)
 
 5.times do
-	wiki = Wiki.create!(
-		title:   Faker::Beer.unique.name,
-		body:    Faker::Lorem.paragraphs(10),
-		private: true,
-		user:    premium_seed_user.sample
-	)
-	wiki.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+  wiki = Wiki.create!(
+    title:   Faker::Beer.unique.name,
+    body:    Faker::Lorem.paragraphs(10),
+    private: true,
+    user:    premium_seed_user.sample
+  )
+  wiki.update_attribute(:created_at, rand(10.minutes..1.year).ago)
 end
 private_wiki = Wiki.where(private: true)
 
 standard_user = User.create!(
-	email:    "member@blocipedia7022.com",
-	password: "password"
+  email:    "member@blocipedia7022.com",
+  password: "password"
 )
 standard_user.skip_confirmation!
 standard_user.save!
 
 premium_user = User.create!(
-	email:    "premium@blocipedia7022.com",
-	password: "password",
-	role:     "premium"
+  email:    "premium@blocipedia7022.com",
+  password: "password",
+  role:     "premium"
 )
 premium_user.skip_confirmation!
 premium_user.save!

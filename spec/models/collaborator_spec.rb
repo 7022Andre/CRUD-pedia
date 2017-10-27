@@ -5,7 +5,7 @@ RSpec.describe Collaborator, type: :model do
   let(:user) { create(:user) }
   let(:collaborator) { create(:collaborator, user: user, wiki: wiki) }
 
-	it "collaborator has user and wiki attributes" do
-		expect(collaborator).to have_attributes(user_id: user.id, wiki_id: wiki.id)
-	end
+  it "collaborator has user and wiki attributes" do
+    expect(collaborator).to have_attributes(user_id: user.id, wiki_id: wiki.id)
+  end
 end
